@@ -44,6 +44,15 @@
         "image": "wa-vera-app/src/img/The_Dark_Side_of_the_Moon.svg",
         "alt": "The Dark Side of the Moon",
         "category": "Classical"
+    }, 
+    { 
+        "name" : "RY X", 
+        "id" : 6, 
+        "title" : "Dawn", 
+        "year": 2016,
+        "image": "wa-vera-app/src/img/The_Dark_Side_of_the_Moon.svg",
+        "alt": "Dawn",
+        "category": "Alternative"
     }
 ]
 
