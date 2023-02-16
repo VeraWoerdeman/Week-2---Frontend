@@ -1,0 +1,49 @@
+
+[
+    { 
+        "name" : "Gustav Mahler", 
+        "id" : 1, 
+        "title" : "Symphony No.2", 
+        "year": 1894,
+        "image": "wa-vera-app/src/img/Gustav_Mahler.jpg",
+        "alt": "Gustav Mahler",
+        "category": "Classical"
+    },
+    { 
+        "name" : "Dimitri Shostakovisch", 
+        "id" : 2, 
+        "title" : "Symphony No.10", 
+        "year": 1951,
+        "image": "./img/Gustav_Mahler.jpg",
+        "alt": "Dimitri Shostakovisch",
+        "category": "Classical"
+    },
+    { 
+        "name" : "Pink Floyd", 
+        "id" : 3, 
+        "title" : "The Dark Side of the Moon", 
+        "year": 1973,
+        "image": "wa-vera-app/src/img/The_Dark_Side_of_the_Moon.svg",
+        "alt": "The Dark Side of the Moon",
+        "category": "Rock"
+    },
+    { 
+        "name" : "Richard Strauss", 
+        "id" : 4, 
+        "title" : "Tod und Verklärung", 
+        "year": 1889,
+        "image": "wa-vera-app/src/img/The_Dark_Side_of_the_Moon.svg",
+        "alt": "The Dark Side of the Moon",
+        "category": "Classical"
+    },
+    { 
+        "name" : "Pyotr Tchaikovsky", 
+        "id" : 5, 
+        "title" : "Romeo and Julliet", 
+        "year": 1880,
+        "image": "wa-vera-app/src/img/The_Dark_Side_of_the_Moon.svg",
+        "alt": "The Dark Side of the Moon",
+        "category": "Classical"
+    }
+]
+
