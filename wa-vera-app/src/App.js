@@ -42,6 +42,7 @@ class App extends Component {
             <img className="d-block" src={post.image} alt={post.alt}
             height="170" />
             </div>
+            
 
             <div className="card-footer">
             <div className="mb-2 text-center text-muted" >{post.category} </div>
