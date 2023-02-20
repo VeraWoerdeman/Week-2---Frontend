@@ -2,7 +2,6 @@ import React from 'react';
 
 function Header({onSortByNameAZ, homePage, nextPage, toggleForm, previousPage, currentPage, onSortByNameZA, onSortByAlbumAZ, onSortByAlbumZA, onSortByYear, onSortByYearRecent, onCategoryChange}) {
   
-  
   return (
     <header>
 <div className="container mt-5">
@@ -29,12 +28,10 @@ function Header({onSortByNameAZ, homePage, nextPage, toggleForm, previousPage, c
             </div>
           </div>
           </div>
-
+          
           <button onClick={homePage} className="btn btn-light" id="home-btn">Home</button>
           <button onClick={toggleForm} className="btn btn-light" id="add-item-btn">Add vinyl</button>
-
-          
-
+           
            {/* Button for sorting genre */}
            <div className="dropdown">
            <div className="nav-item dropdown">
@@ -54,7 +51,6 @@ function Header({onSortByNameAZ, homePage, nextPage, toggleForm, previousPage, c
            </div>
            </nav>   
          </div>
-         
          <div className="container-fluid text-center mt-3" >
             <div className="container-fluid current-page" id="current-page">Current Page: {currentPage}</div>
          <button onClick={previousPage} className="btn btn-light" id= "prev-page-btn"width="30">
@@ -63,9 +59,8 @@ function Header({onSortByNameAZ, homePage, nextPage, toggleForm, previousPage, c
          <button onClick={nextPage} className="btn btn-light" id="next-page-btn" width="30">
     <img src="img/arrow-right.svg" alt="arrow-right" width="20" /> Next
 </button>
-
-</div></div>
-
+</div>
+</div>
 </div>
 </header>
 );

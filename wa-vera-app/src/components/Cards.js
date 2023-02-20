@@ -1,12 +1,8 @@
 import React from 'react';
 
-
 function Card({ name, id, title,  year, image, category, alt }) {
-    return (
-        
-      <div className="col-lg-auto d-block justify-content-center" width = "20" 
-        
-      >
+    return ( 
+      <div className="col-lg-auto d-block justify-content-center" width = "20" >
         <div className="card" key={id} >  
           <div className="card-header text-center h7">
             {name} 
