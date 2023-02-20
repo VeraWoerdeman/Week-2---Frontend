@@ -5,8 +5,6 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import AddItemForm from './components/AddItemForm';
 
-
-
 class App extends Component {
   
   state = {
@@ -15,6 +13,7 @@ class App extends Component {
     cardsPerPage: 5, 
     selectedCategory: '', 
     sortedComposers: '',
+    currentCards: [],
     showForm: false,
     formData: {
       name: '',
@@ -23,9 +22,7 @@ class App extends Component {
       category: '',
       image: '',
     },
-
   };  
-
 
   handleSortByNameAZ = () => {
     const sortedComposers = [...this.state.composers].sort((a, b) => {
@@ -128,15 +125,15 @@ class App extends Component {
     });
   };
     
-  handleInputChange = e => {
-    const { name, value } = e.target;
-    this.setState(prevState => ({
-      formData: {
-        ...prevState.formData,
-        [name]: value
-      }
-    }));
-  };
+  // handleInputChange = e => {
+  //   const { name, value } = e.target;
+  //   this.setState(prevState => ({
+  //     formData: {
+  //       ...prevState.formData,
+  //       [name]: value
+  //     }
+  //   }));
+  // };
 
   handleHomeScreen = () => {
     const sortedComposers = [...this.state.composers].sort((a, b) => {
@@ -149,6 +146,31 @@ class App extends Component {
       showForm: false,
     });
       }
+
+  handleInputChange = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
+  handleSubmit = newCard => {
+    this.setState(prevState => ({
+      currentCards: [...prevState.currentCards, newCard]
+    }));
+  };
+
+  // handleSubmit = e => {
+  //   e.preventDefault();
+  //   this.props.onSubmit(this.state);
+  //   this.setState({
+
+  //     name: '',
+  //     title: '',
+  //     year: '',
+  //     category: '',
+  //     image: ''
+      
+  //   });
+  // };
 
   render() {
     const { composers, currentPage, cardsPerPage, selectedCategory } = this.state;
@@ -190,7 +212,7 @@ class App extends Component {
           <div className="row row-col mt-3 justify-content-center">
             {this.state.showForm ? (
               <AddItemForm
-                handleSubmitItem={this.handleAddItem}
+                handleSubmitForm={this.handleAddItem}
                 handleInputChange={this.handleInputChange}
                 formData={this.state.formData}
                 handleCancel={this.handleHomeScreen}
