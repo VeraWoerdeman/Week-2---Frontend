@@ -6,14 +6,15 @@ import Footer from './components/Footer';
 import AddItemForm from './components/AddItemForm';
 
 class App extends Component {
-  
-  state = {
+  constructor(props) {
+    super(props);
+    this.state = {
     composers: composers,
     currentPage: 1,
     cardsPerPage: 5, 
     selectedCategory: '', 
     sortedComposers: '',
-    currentCards: [],
+    showBottomHeader: true,
     showForm: false,
     formData: {
       name: '',
@@ -23,7 +24,7 @@ class App extends Component {
       image: '',
     },
   };  
-
+}
   handleSortByNameAZ = () => {
     const sortedComposers = [...this.state.composers].sort((a, b) => {
       return a.name.localeCompare(b.name);
@@ -104,37 +105,6 @@ class App extends Component {
       showForm: !prevState.showForm
     }));
   } 
-
-  handleAddItem = e => {
-    e.preventDefault();
-    const { name, title, year, category, image } = this.state.formData;
-    const newId = this.state.composers[this.state.composers.length - 1].id + 1;
-    const newItem = { id: newId, name, title, year, category, image };
-    const newComposers = [...this.state.composers, newItem];
-    this.setState({
-      composers: newComposers,
-      filteredComposers: newComposers,
-      showForm: false,
-      formData: {
-        name: '',
-        title: '',
-        year: '',
-        category: '',
-        image: '',
-      },
-    });
-  };
-    
-  // handleInputChange = e => {
-  //   const { name, value } = e.target;
-  //   this.setState(prevState => ({
-  //     formData: {
-  //       ...prevState.formData,
-  //       [name]: value
-  //     }
-  //   }));
-  // };
-
   handleHomeScreen = () => {
     const sortedComposers = [...this.state.composers].sort((a, b) => {
       return a.id - b.id;
@@ -147,30 +117,14 @@ class App extends Component {
     });
       }
 
-  handleInputChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  };
-
-  handleSubmit = newCard => {
-    this.setState(prevState => ({
-      currentCards: [...prevState.currentCards, newCard]
+  handleAddItem = (newItem) => {
+    const newId = this.state.composers[this.state.composers.length - 1].id + 1;
+    const itemWithId = { id: newId, ...newItem };
+    this.setState((prevState) => ({
+      composers: [...prevState.composers, itemWithId],
+      showForm: false,
     }));
   };
-
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   this.props.onSubmit(this.state);
-  //   this.setState({
-
-  //     name: '',
-  //     title: '',
-  //     year: '',
-  //     category: '',
-  //     image: ''
-      
-  //   });
-  // };
 
   render() {
     const { composers, currentPage, cardsPerPage, selectedCategory } = this.state;
@@ -211,15 +165,13 @@ class App extends Component {
        <div className="App">
           <div className="row row-col mt-3 justify-content-center">
             {this.state.showForm ? (
-              <AddItemForm
-                handleSubmitForm={this.handleAddItem}
-                handleInputChange={this.handleInputChange}
-                formData={this.state.formData}
-                handleCancel={this.handleHomeScreen}
-              />
+              <AddItemForm handleAddItem={this.handleAddItem} 
+              handleCancel={this.handleHomeScreen}/>
             ) : (
               renderedCards
+              
             )}
+
           </div>
           <Footer />
         </div>

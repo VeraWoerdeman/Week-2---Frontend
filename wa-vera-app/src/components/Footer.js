@@ -11,8 +11,8 @@ return (
           <h6 className="text-center">15005755 - Vera Woerdeman</h6>
          
          </div>
-        </div>
-        </footer>
+      </div>
+    </footer>
 );  
 }
 
