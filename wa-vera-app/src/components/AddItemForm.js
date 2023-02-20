@@ -46,29 +46,27 @@ class AddItemForm extends Component {
 
     return (
       <form onSubmit={() => this.props.handleSubmit({ name, title, year, category, image })}>
-        <div>
+        <div className="form-group">
           <label htmlFor="name">Name:</label>
-          <input type="text" id="name" name="name" value={name} onChange={this.handleInputChange} />
+          <input type="text" name="name" id="name" className="form-control" value={this.state.name} onChange={this.handleInputChange} />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="title">Title:</label>
-          <input type="text" id="title" name="title" value={title} onChange={this.handleInputChange} />
+          <input type="text" name="title" id="title" className="form-control" value={this.state.title} onChange={this.handleInputChange} />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="year">Year:</label>
-          <input type="text" id="year" name="year" value={year} onChange={this.handleInputChange} />
+          <input type="text" name="year" id="year" className="form-control" value={this.state.year} onChange={this.handleInputChange} />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="category">Category:</label>
-          <input type="text" id="category" name="category" value={category} onChange={this.handleInputChange} />
+          <input type="text" name="category" id="category" className="form-control" value={this.state.category} onChange={this.handleInputChange} />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="image">Image:</label>
-          <input type="text" id="image" name="image" value={image} onChange={this.handleInputChange} />
+          <input type="text" name="image" id="image" className="form-control" value={this.state.image} onChange={this.handleInputChange} />
         </div>
-        <div>
-          <button type="submit">OK</button>
-        </div>
+        <button type="submit" className="btn btn-primary">Add vinyl</button>
       </form>
     );
   }

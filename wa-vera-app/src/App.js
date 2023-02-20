@@ -26,16 +26,7 @@ class App extends Component {
 
   };  
 
-  handleHomeScreen = () => {
-    this.setState({
-      composers: composers,
-      selectedCategory: "",
-      sortBy: "",
-      currentPage:1
-    });
 
-  }
-  
   handleSortByNameAZ = () => {
     const sortedComposers = [...this.state.composers].sort((a, b) => {
       return a.name.localeCompare(b.name);
@@ -146,6 +137,16 @@ class App extends Component {
       }
     }));
   };
+
+  handleHomeScreen = () => {
+    this.setState({
+      composers: composers,
+      selectedCategory: "",
+      sortBy: "",
+      currentPage:1
+    });
+
+  }
   
   render() {
     const { composers, currentPage, cardsPerPage, selectedCategory } = this.state;
@@ -165,34 +166,55 @@ class App extends Component {
         image={composer.image}
       />
     ));
-    console.log(renderedCards)
+  
+    if (this.state.showForm) {
+      renderedCards.push(
+        <Card
+          key="new-card"
+          name={this.state.formData.name}
+          title={this.state.formData.title}
+          year={this.state.formData.year}
+          category={this.state.formData.category}
+          image={this.state.formData.image}
+        />
+      );
+    }
   
     return (
       <div>
-        <Header onSortByYearRecent={this.handleSortByYearRecent}
-        onSortByNameAZ={this.handleSortByNameAZ} 
-        onSortByNameZA={this.handleSortByNameZA} 
-        onSortByAlbumAZ={this.handleSortByAlbumAZ}
-        onSortByAlbumZA={this.handleSortByAlbumZA}
-        onSortByYear={this.handleSortByYear} 
-        nextPage={this.handleNextPage}
-        previousPage={this.handlePreviousPage}
-        onCategoryChange={this.handleCategoryChange}
-        homePage={this.handleHomeScreen}
-        toggleForm={this.toggleForm}
-        submitForm={this.handleAddItem}
-        onSort={this.handleSort} currentPage={currentPage} />
-           <div className="App"> 
-        <div className="row row-col mt-3 justify-content-center">            
-          
-        {this.state.showForm ? <AddItemForm handleSubmit={this.handleAddItem} /> : renderedCards}
-        </div>  
-        <Footer />
-      </div>
+        <Header
+          onSortByYearRecent={this.handleSortByYearRecent}
+          onSortByNameAZ={this.handleSortByNameAZ}
+          onSortByNameZA={this.handleSortByNameZA}
+          onSortByAlbumAZ={this.handleSortByAlbumAZ}
+          onSortByAlbumZA={this.handleSortByAlbumZA}
+          onSortByYear={this.handleSortByYear}
+          nextPage={this.handleNextPage}
+          previousPage={this.handlePreviousPage}
+          onCategoryChange={this.handleCategoryChange}
+          homePage={this.handleHomeScreen}
+          toggleForm={this.toggleForm}
+          submitForm={this.handleAddItem}
+          onSort={this.handleSort}
+          currentPage={currentPage}
+        />
+        <div className="App">
+          <div className="row row-col mt-3 justify-content-center">
+            {this.state.showForm ? (
+              <AddItemForm
+                handleSubmit={this.handleAddItem}
+                handleInputChange={this.handleInputChange}
+                formData={this.state.formData}
+              />
+            ) : (
+              renderedCards
+            )}
+          </div>
+          <Footer />
+        </div>
       </div>
     );
   }
-  
 }
 
 export default App;
