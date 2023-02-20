@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function Card({ name, title, id, description, year, image, category, alt }) {
+function Card({ name, id, title,  year, image, category, alt }) {
     return (
         
       <div className="col-lg-auto d-block justify-content-center" width = "20" 

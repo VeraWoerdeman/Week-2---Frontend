@@ -15,14 +15,14 @@ class AddItemForm extends Component {
   };
 
   handleSubmit = e => {
-    //e.preventDefault();
-    this.onSubmit(this.state);
+    e.preventDefault();
+    this.props.onSubmit(this.state);
     this.setState({
       name: '',
       title: '',
       year: '',
       category: '',
-      image: '',
+      image: ''
     });
   };
 
@@ -84,7 +84,7 @@ class AddItemForm extends Component {
             onChange={this.handleInputChange}
           />
         </div>
-        <button type="submit" className="btn btn-primary mr-2" onClick={this.props.handleSubmit}>
+        <button type="submit" className="btn btn-primary mr-2" onClick={this.props.handleSubmitItem}>
           Submit
         </button>
         <button

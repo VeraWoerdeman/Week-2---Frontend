@@ -19,7 +19,6 @@ class App extends Component {
     formData: {
       name: '',
       title: '',
-      key: '',
       year: '',
       category: '',
       image: '',
@@ -112,7 +111,8 @@ class App extends Component {
   handleAddItem = e => {
     e.preventDefault();
     const { name, title, year, category, image } = this.state.formData;
-    const newItem = { name, title, year, category, image, id: Date.now() };
+    const newId = this.state.composers[this.state.composers.length - 1].id + 1;
+    const newItem = { id: newId, name, title, year, category, image };
     const newComposers = [...this.state.composers, newItem];
     this.setState({
       composers: newComposers,
@@ -120,7 +120,6 @@ class App extends Component {
       showForm: false,
       formData: {
         name: '',
-        key: '',
         title: '',
         year: '',
         category: '',
@@ -128,8 +127,7 @@ class App extends Component {
       },
     });
   };
-  
-  
+    
   handleInputChange = e => {
     const { name, value } = e.target;
     this.setState(prevState => ({
@@ -145,20 +143,13 @@ class App extends Component {
       return a.id - b.id;
     });
     this.setState({
-      
-      
       composers: sortedComposers,
       selectedCategory: '',
       currentPage:1,
       showForm: false,
     });
+      }
 
-   
-  
-    }
-
-  
-  
   render() {
     const { composers, currentPage, cardsPerPage, selectedCategory } = this.state;
     const filteredComposers = selectedCategory
@@ -169,8 +160,8 @@ class App extends Component {
     const currentCards = filteredComposers.slice(indexOfFirstCard, indexOfLastCard);
     const renderedCards = currentCards.map(composer => (
       <Card
-        key={composer.id}
         name={composer.name}
+        key={composer.id}
         title={composer.title}
         year={composer.year}
         category={composer.category}
@@ -182,11 +173,11 @@ class App extends Component {
     //   renderedCards.push(
     //     <Card
     //       key="new-card"
-    //       name={this.state.formData.name}
-    //       title={this.state.formData.title}
-    //       year={this.state.formData.year}
-    //       category={this.state.formData.category}
-    //       image={this.state.formData.image}
+    //       name={this.formData.name}
+    //       title={this.formData.title}
+    //       year={this.formData.year}
+    //       category={this.formData.category}
+    //       image={this.formData.image}
     //     />
     //   );
     // }
@@ -205,14 +196,14 @@ class App extends Component {
          onCategoryChange={this.handleCategoryChange}
          homePage={this.handleHomeScreen}
          toggleForm={this.toggleForm}
-         submitForm={this.handleAddItem}
          currentPage={currentPage}
+         
         />
        <div className="App">
           <div className="row row-col mt-3 justify-content-center">
             {this.state.showForm ? (
               <AddItemForm
-                handleSubmit={this.handleAddItem}
+                handleSubmitItem={this.handleAddItem}
                 handleInputChange={this.handleInputChange}
                 formData={this.state.formData}
                 handleCancel={this.handleHomeScreen}

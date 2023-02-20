@@ -6,8 +6,7 @@
         "year": 1894,
        "image": "./img/Mahler_Symphony2.jpg",
         "alt": "Gustav Mahler",
-        "category": "Classical",
-        "line": "\n"
+        "category": "Classical"
     },
     { 
         "name" : "The Beatles", 
@@ -108,8 +107,7 @@
         "year": 1951,
         "image": "./img/Shos_Symphony10.jpg",
         "alt": "Dimitri Shostakovisch",
-        "category": "Classical",
-        "line": "\n"
+        "category": "Classical"
     },
  
     { 
