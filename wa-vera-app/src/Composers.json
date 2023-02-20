@@ -1,29 +1,30 @@
-
 [
     { 
         "name" : "Gustav Mahler", 
         "id" : 1, 
         "title" : "Symphony No.2", 
         "year": 1894,
-        "image": "wa-vera-app/src/img/Gustav_Mahler.jpg",
+       "image": "./img/Mahler_Symphony2.jpg",
         "alt": "Gustav Mahler",
-        "category": "Classical"
+        "category": "Classical",
+        "line": "\n"
     },
     { 
-        "name" : "Dimitri Shostakovisch", 
+        "name" : "The Beatles", 
         "id" : 2, 
-        "title" : "Symphony No.10", 
-        "year": 1951,
-        "image": "./img/Gustav_Mahler.jpg",
-        "alt": "Dimitri Shostakovisch",
-        "category": "Classical"
+        "title" : "Abbey Road", 
+        "year": 1969,
+        "image": "./img/Abbey_Road.jpeg",
+        "alt": "Abbey Road",
+        "category": "Rock"
     },
+    
     { 
         "name" : "Pink Floyd", 
         "id" : 3, 
-        "title" : "The Dark Side of the Moon", 
+        "title" : "Dark Side of the Moon", 
         "year": 1973,
-        "image": "wa-vera-app/src/img/The_Dark_Side_of_the_Moon.svg",
+        "image": "/img/The_Dark_Side_of_the_Moon.svg",
         "alt": "The Dark Side of the Moon",
         "category": "Rock"
     },
@@ -32,16 +33,16 @@
         "id" : 4, 
         "title" : "Tod und Verklärung", 
         "year": 1889,
-        "image": "wa-vera-app/src/img/The_Dark_Side_of_the_Moon.svg",
+        "image": "./img/Tod_und_Verklarung.jpg",
         "alt": "The Dark Side of the Moon",
         "category": "Classical"
     },
     { 
         "name" : "Pyotr Tchaikovsky", 
         "id" : 5, 
-        "title" : "Romeo and Julliet", 
+        "title" : "Romeo and Juliet", 
         "year": 1880,
-        "image": "wa-vera-app/src/img/The_Dark_Side_of_the_Moon.svg",
+        "image": "./img/Romeo_and_Juliet.jpg",
         "alt": "The Dark Side of the Moon",
         "category": "Classical"
     }, 
@@ -50,9 +51,75 @@
         "id" : 6, 
         "title" : "Dawn", 
         "year": 2016,
-        "image": "wa-vera-app/src/img/The_Dark_Side_of_the_Moon.svg",
+        "image": "./img/RY_X.jpeg",
         "alt": "Dawn",
         "category": "Alternative"
+    }, 
+    { 
+        "name" : "Billie Eilish", 
+        "id" : 7, 
+        "title" : "When we all fall asleep", 
+        "year": 2019,
+        "image": "./img/Billie_Eilish.png",
+        "alt": "When we all fall asleep",
+        "category": "Pop"
+    },
+    { 
+        "name" : "Rammstein", 
+        "id" : 8, 
+        "title" : "Zeit", 
+        "year": 2022,
+        "image": "./img/Rammstein.jpg",
+        "alt": "Zeit",
+        "category": "Metal"
+    },
+
+    { 
+        "name" : "Cody Fry", 
+        "id" : 9, 
+        "title" : "Symphonic Sessions", 
+        "year": 2022,
+        "image": "./img/Cody_Fry.png",
+        "alt": "Symphonic Sessions",
+        "category": "Singer-Songwriter"
+    },
+       { 
+        "name" : "St.Michael Thorn", 
+        "id" : 10, 
+        "title" : "Celebration", 
+        "year": 2020,
+        "image": "./img/Celebration.jpg",
+        "alt": "Celebration",
+        "category": "Classical"
+    }, 
+    { 
+        "name" : "Stromae", 
+        "id" : 11, 
+        "title" : "Racine Carrée", 
+        "year": 2013,
+        "image": "./img/Stromae.jpg",
+        "alt": "Racine Carrée",
+        "category": "Pop"
+    },
+    { 
+        "name" : "Dimitri Shostakovisch", 
+        "id" : 12, 
+        "title" : "Symphony No.10", 
+        "year": 1951,
+        "image": "./img/Shos_Symphony10.jpg",
+        "alt": "Dimitri Shostakovisch",
+        "category": "Classical",
+        "line": "\n"
+    },
+ 
+    { 
+        "name" : "Radiohead", 
+        "id" : 13, 
+        "title" : "OK Computer", 
+        "year": 1997,
+        "image": "./img/OK_Computer.png",
+        "alt": "OK Computer",
+        "category": "Rock"
     }
 ]
 
