@@ -14,11 +14,12 @@ class App extends Component {
     currentPage: 1,
     cardsPerPage: 5, 
     selectedCategory: '', 
-    sortBy: '', 
+    sortedComposers: '',
     showForm: false,
     formData: {
       name: '',
       title: '',
+      key: '',
       year: '',
       category: '',
       image: '',
@@ -119,14 +120,15 @@ class App extends Component {
       showForm: false,
       formData: {
         name: '',
+        key: '',
         title: '',
         year: '',
         category: '',
         image: '',
       },
     });
-    console.log('handleAddItem was called')
-  }
+  };
+  
   
   handleInputChange = e => {
     const { name, value } = e.target;
@@ -139,14 +141,23 @@ class App extends Component {
   };
 
   handleHomeScreen = () => {
+    const sortedComposers = [...this.state.composers].sort((a, b) => {
+      return a.id - b.id;
+    });
     this.setState({
-      composers: composers,
-      selectedCategory: "",
-      sortBy: "",
-      currentPage:1
+      
+      
+      composers: sortedComposers,
+      selectedCategory: '',
+      currentPage:1,
+      showForm: false,
     });
 
-  }
+   
+  
+    }
+
+  
   
   render() {
     const { composers, currentPage, cardsPerPage, selectedCategory } = this.state;
@@ -167,44 +178,44 @@ class App extends Component {
       />
     ));
   
-    if (this.state.showForm) {
-      renderedCards.push(
-        <Card
-          key="new-card"
-          name={this.state.formData.name}
-          title={this.state.formData.title}
-          year={this.state.formData.year}
-          category={this.state.formData.category}
-          image={this.state.formData.image}
-        />
-      );
-    }
+    // if (this.state.showForm) {
+    //   renderedCards.push(
+    //     <Card
+    //       key="new-card"
+    //       name={this.state.formData.name}
+    //       title={this.state.formData.title}
+    //       year={this.state.formData.year}
+    //       category={this.state.formData.category}
+    //       image={this.state.formData.image}
+    //     />
+    //   );
+    // }
   
     return (
       <div>
         <Header
-          onSortByYearRecent={this.handleSortByYearRecent}
-          onSortByNameAZ={this.handleSortByNameAZ}
-          onSortByNameZA={this.handleSortByNameZA}
-          onSortByAlbumAZ={this.handleSortByAlbumAZ}
-          onSortByAlbumZA={this.handleSortByAlbumZA}
-          onSortByYear={this.handleSortByYear}
-          nextPage={this.handleNextPage}
-          previousPage={this.handlePreviousPage}
-          onCategoryChange={this.handleCategoryChange}
-          homePage={this.handleHomeScreen}
-          toggleForm={this.toggleForm}
-          submitForm={this.handleAddItem}
-          onSort={this.handleSort}
-          currentPage={currentPage}
+         onSortByYearRecent={this.handleSortByYearRecent}
+         onSortByNameAZ={this.handleSortByNameAZ}
+         onSortByNameZA={this.handleSortByNameZA}
+         onSortByAlbumAZ={this.handleSortByAlbumAZ}
+         onSortByAlbumZA={this.handleSortByAlbumZA}
+         onSortByYear={this.handleSortByYear}
+         nextPage={this.handleNextPage}
+         previousPage={this.handlePreviousPage}
+         onCategoryChange={this.handleCategoryChange}
+         homePage={this.handleHomeScreen}
+         toggleForm={this.toggleForm}
+         submitForm={this.handleAddItem}
+         currentPage={currentPage}
         />
-        <div className="App">
+       <div className="App">
           <div className="row row-col mt-3 justify-content-center">
             {this.state.showForm ? (
               <AddItemForm
                 handleSubmit={this.handleAddItem}
                 handleInputChange={this.handleInputChange}
                 formData={this.state.formData}
+                handleCancel={this.handleHomeScreen}
               />
             ) : (
               renderedCards
