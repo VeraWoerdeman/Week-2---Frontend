@@ -35,18 +35,14 @@ class App extends Component {
   handleSortByNameZA = () => {
     const sortedComposers = [...this.state.composers].sort((a, b) => {
       return b.name.localeCompare(a.name);
-      
     });
-
     this.setState({ composers: sortedComposers, currentPage:1 });
-    
   }
 
   handleSortByAlbumAZ = () => {
     const sortedComposers = [...this.state.composers].sort((a, b) => {
       return a.title.localeCompare(b.title);
     });
-
     this.setState({ composers: sortedComposers, currentPage:1 });
   }
 
@@ -54,7 +50,6 @@ class App extends Component {
     const sortedComposers = [...this.state.composers].sort((a, b) => {
       return b.title.localeCompare(a.natitleme);
     });
-
     this.setState({ composers: sortedComposers, currentPage:1 });
   }
 
@@ -62,7 +57,6 @@ class App extends Component {
     const sortedComposers = [...this.state.composers].sort((a, b) => {
       return a.year - b.year;
     });
-
     this.setState({ composers: sortedComposers, currentPage:1 });
   }
 
@@ -70,7 +64,6 @@ class App extends Component {
     const sortedComposers = [...this.state.composers].sort((a, b) => {
       return b.year - a.year;
     });
-
     this.setState({ composers: sortedComposers, currentPage:1 });
   }
 
@@ -160,7 +153,6 @@ class App extends Component {
          homePage={this.handleHomeScreen}
          toggleForm={this.toggleForm}
          currentPage={currentPage}
-         
         />
        <div className="App">
           <div className="row row-col mt-3 justify-content-center">
@@ -169,7 +161,6 @@ class App extends Component {
               handleCancel={this.handleHomeScreen}/>
             ) : (
               renderedCards
-              
             )}
 
           </div>
