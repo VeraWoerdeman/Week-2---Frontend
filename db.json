@@ -1,4 +1,5 @@
-[
+{
+"collection": [
     { 
         "name" : "Gustav Mahler", 
         "id" : 1, 
@@ -119,5 +120,6 @@
         "alt": "OK Computer",
         "category": "Rock"
     }
-]
 
+]
+}
