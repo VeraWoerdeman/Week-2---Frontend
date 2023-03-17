@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Card from './components/Cards';
-import composers from './Composers.json'
+//import composers from './Composers.json'
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AddItemForm from './components/AddItemForm';
