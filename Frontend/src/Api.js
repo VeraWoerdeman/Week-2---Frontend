@@ -11,5 +11,6 @@ function getAllAlbums() {
   }
 
   function getAllComposers() { 
-    return fetch(`${baseUrl}/albums`).then(response => response.json());
+    return fetch(`${baseUrl}/composers`)
+    .then(response => response.json());
   }

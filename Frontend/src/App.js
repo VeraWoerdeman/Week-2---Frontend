@@ -1,5 +1,3 @@
-//make this app.js show the home page and the collection page
-
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
@@ -11,7 +9,7 @@ class App extends Component {
         return (
         <Router>
             <Routes>
-            <Route exact path="/" component={Collection} />
+            <Route exact path="/" component={Home} />
             <Route exact path="/collection" component={Collection} />
             </Routes>
         </Router>

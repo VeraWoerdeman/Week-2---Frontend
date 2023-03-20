@@ -17,7 +17,6 @@ const Home = () => {
 
 export default Home;
 
-
 // class Home extends React.Component { 
 //   constructor(props) {
 //     super(props);
