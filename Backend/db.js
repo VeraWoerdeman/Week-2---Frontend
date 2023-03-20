@@ -29,8 +29,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 });
 
-module.exports = { sql, pool }
-
+module.exports = {app, pool, config};
 
 
 // //GET-requests

@@ -26,6 +26,8 @@ class App extends Component {
     },
   };  
 }
+
+
   handleSortByNameAZ = () => {
     const sortedComposers = [...this.state.composers].sort((a, b) => {
       return a.name.localeCompare(b.name);

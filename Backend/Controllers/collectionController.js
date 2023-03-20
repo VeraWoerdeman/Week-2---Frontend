@@ -35,27 +35,46 @@ exports.getAllArtists = (req, res) => {
   };
 
 //get artist by id
-exports.getArtistById = (req, res) => { 
-    const query = 'Select * from Artists where id = ?'
-    db.pool.request().query(query, (err, result) => {
-        if (err) { 
-          console.log('Error executing query:', err);
-          res.status(500).send('Error executing query');
-        } else {
-          const jsonResult = result.recordset.map((record) => {
-              return JSON.stringify(record) + '\n';
-            }).join('\n');
-            res.set('Content-Type', 'application/json');
-            res.send(jsonResult);
-          }
-      });
-    };
+exports.getArtistById = (req, res) => {
+  const query = 'SELECT * FROM Artists WHERE ArtistId = @id';
+  const { id } = req.params;
+  db.pool.request().input('id', id).query(query, (err, result) => {
+    if (err) { 
+      console.log('Error executing query:', err);
+      res.status(500).send('Error executing query');
+    } else {
+      const jsonResult = result.recordset.map((record) => {
+          return JSON.stringify(record) + '\n';
+        }).join('\n');
+        res.set('Content-Type', 'application/json');
+        res.send(jsonResult);
+      }
+  });
+};
+
+//get album by id
+exports.getAlbumById = (req, res) => {
+  const query = 'SELECT * FROM Albums WHERE AlbumId = @id';
+  const { id } = req.params;
+  db.pool.request().input('id', id).query(query, (err, result) => {
+    if (err) { 
+      console.log('Error executing query:', err);
+      res.status(500).send('Error executing query');
+    } else {
+      const jsonResult = result.recordset.map((record) => {
+          return JSON.stringify(record) + '\n';
+        }).join('\n');
+        res.set('Content-Type', 'application/json');
+        res.send(jsonResult);
+      }
+  });
+};
 
 //create artist
 exports.createArtist = (req, res) => { 
     const query  = 'INSERT INTO artists (Name) VALUES (@name)'
         const { name } = req.body;
-        db.pool.request().query(query, (err, result) => {
+        db.pool.request().input('name', name).query(query, (err, result) => {
           if (err) {
             console.log('Error executing query:', err);
             res.status(500).send('Error executing query');
@@ -70,11 +89,30 @@ exports.createArtist = (req, res) => {
         });
       };
       
+//create album
+exports.createAlbums = (req, res) => { 
+  const query  = 'INSERT INTO Albums (Name) VALUES (@name)'
+      const { name } = req.body;
+      db.pool.request().input('name', name).query(query, (err, result) => {
+        if (err) {
+          console.log('Error executing query:', err);
+          res.status(500).send('Error executing query');
+        } else {
+          const jsonResult = result.recordset.map((record) => {
+              return JSON.stringify(record) + '\n';
+            }).join('\n');
+            res.set('Content-Type', 'application/json');
+            res.send(jsonResult);
+          res.send(`Albums ${name} has been added to the database`);
+        }
+      });
+    };
+
 //delete artist by id
 exports.deleteArtist = (req, res) => {
   const query = 'DELETE FROM Artists WHERE id = ?'  
   const { id } = req.params;
-  db.pool.request().query(query, (err, result) => {
+  db.pool.request().input('id', id).query(query, (err, result) => {
     if (err) { 
       console.log('Error executing query:', err);
       res.status(500).send('Error executing query');
@@ -94,7 +132,7 @@ exports.deleteArtist = (req, res) => {
 exports.deleteAlbum = (req, res) => {
   const query = 'DELETE FROM Albums WHERE id = ?'
   const { id } = req.params;
-  db.pool.request().query(query, (err, result) => {
+  db.pool.request().input('id', id).query(query, (err, result) => {
     if (err) { 
       console.log('Error executing query:', err);
       res.status(500).send('Error executing query');
@@ -115,7 +153,7 @@ exports.updateArtist = (req, res) => {
   const query = 'UPDATE Artists SET Name = ? WHERE id = ?'
   const { id } = req.params;
   const { name } = req.body;
-  db.pool.request().query(query, (err, result) => {
+  db.pool.request().input('id', id, 'name', name).query(query, (err, result) => {
     if (err) { 
       console.log('Error executing query:', err);
       res.status(500).send('Error executing query');

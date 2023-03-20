@@ -4,16 +4,16 @@ import Header from '../components/Header'
 import AddItemForm  from '../components/AddItemForm';
 import Collection from '../pages/Collection'
 
-const Home = () => {
+function Home() {
   return (
-    <div>
+    <div className="App">
       <Header />
       <AddItemForm />
       <Collection />
       <Footer />
     </div>
   );
-};
+}
 
 export default Home;
 

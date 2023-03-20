@@ -5,16 +5,16 @@ import Collection from './pages/Collection';
 import './App.css';
 
 class App extends Component {
-    render() {
-        return (
-        <Router>
-            <Routes>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/collection" component={Collection} />
-            </Routes>
-        </Router>
-        );
-    }
+  render() {
+    return (
+      <Router>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/collection' element={<Collection />} />
+        </Routes>
+      </Router>
+    );
+  }
 }
 
 export default App;
