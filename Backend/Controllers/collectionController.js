@@ -1,5 +1,5 @@
 const { application } = require('express');
-const db = require('./db.js');
+const db = require('../db.js');
 
 exports.getAllArtists = (req, res) =>  {
     const query = 'Select * from Artists'; 
@@ -40,4 +40,17 @@ exports.getArtistById = (req, res) => {
         res.status(200).json(row);
     });
 };
+
+exports.createArtist = (req, res) => { 
+    const query = 'insert into Artists (Name) values (?)'
+    const { name } = req.body;
+    db.run(query, [name], function (err) { 
+        if(err) { 
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.setHeader('Content-Type', 'application/json');
+        res.status(201).json({ id: this.lastID });
+    });
+}
 

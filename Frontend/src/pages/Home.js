@@ -2,6 +2,7 @@ import React from 'react';
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import AddItemForm  from '../components/AddItemForm';
+import Collection from '../pages/Collection'
 
 class Home extends React.Component { 
     render() { 
@@ -29,6 +30,7 @@ class Home extends React.Component {
             ) : (
               renderedCards
             )}
+            <Collection></Collection>
 
           </div>
           <Footer />

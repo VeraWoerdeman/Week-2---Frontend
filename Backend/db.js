@@ -199,7 +199,7 @@ app.get('/composers/search', (req, res) => {
     });
 });
 
-const port = 3002;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+// const port = 3010;
+// app.listen(port, () => {
+//   console.log(`Server is running on port ${port}`);
+// });
