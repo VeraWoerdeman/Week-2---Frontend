@@ -94,6 +94,18 @@ app.post('/composers', (req, res) => {
   });
 });
 
+app.post('/albums', (req, res) => {
+  const { name } = req.body;
+  pool.request().input('Name', sql.NVarChar, name).query('INSERT INTO composers (Name) VALUES (@name)', (err, result) => {
+    if (err) {
+      console.log('Error executing query:', err);
+      res.status(500).send('Error executing query');
+    } else {
+      res.send(`Composer ${name} has been added to the database`);
+    }
+  });
+});
+
 //DELETE-requests
 app.delete('/artists/:id', (req, res) => {
   const artistId = req.params.id;
