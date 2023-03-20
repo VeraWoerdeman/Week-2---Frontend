@@ -8,11 +8,11 @@ class Collection extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-        composers: [],
+        albums: [],
         currentPage: 1,
         cardsPerPage: 5, 
         selectedCategory: '', 
-        sortedComposers: '',
+        sortedalbums: '',
         showBottomHeader: true,
         showForm: false,
         formData: {
@@ -29,7 +29,7 @@ class Collection extends React.Component {
     fetch("http://localhost:4001/albums/")
 		  .then((response) => response.json())
 		  .then((data) => {
-			this.setState({ collection: data });
+			this.setState({ albums: data });
 		  })
 		  .catch((error) => {
 			console.error("Error fetching collection:", error);
@@ -40,13 +40,13 @@ class Collection extends React.Component {
 
   
   render() {
-    const { composers, currentPage, cardsPerPage, selectedCategory } = this.state;
-    const filteredComposers = selectedCategory
-      ? composers.filter(composer => composer.category === selectedCategory)
-      : composers;
+    const { albums, currentPage, cardsPerPage, selectedCategory } = this.state;
+    const filteredalbums = selectedCategory
+      ? albums.filter(composer => composer.category === selectedCategory)
+      : albums;
     const indexOfLastCard = currentPage * cardsPerPage;
     const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-    const currentCards = filteredComposers.slice(indexOfFirstCard, indexOfLastCard);
+    const currentCards = filteredalbums.slice(indexOfFirstCard, indexOfLastCard);
     const renderedCards = currentCards.map(composer => (
       <Card
         name={composer.name}

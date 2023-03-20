@@ -5,46 +5,65 @@ import AddItemForm  from '../components/AddItemForm';
 import Collection from '../pages/Collection'
 
 class Home extends React.Component { 
+  constructor(props) {
+    super(props);
+    this.state = {
+    albums: [],
+    currentPage: 1,
+    cardsPerPage: 5, 
+    selectedCategory: '', 
+    sortedalbums: '',
+    showBottomHeader: true,
+    showForm: false,
+    formData: {
+      name: '',
+      title: '',
+      year: '',
+      category: '',
+      image: '',
+    },
+  };  
+}
   handleSortByNameAZ = () => {
-    const sortedComposers = [...this.state.composers].sort((a, b) => {
+    const sortedalbums = [...this.state.albums].sort((a, b) => {
       return a.name.localeCompare(b.name);
     });
-    this.setState({ composers: sortedComposers, currentPage:1 });
+    this.setState({ albums: sortedalbums, currentPage:1 });
   }
 
   handleSortByNameZA = () => {
-    const sortedComposers = [...this.state.composers].sort((a, b) => {
+    const sortedalbums = [...this.state.albums].sort((a, b) => {
       return b.name.localeCompare(a.name);
     });
-    this.setState({ composers: sortedComposers, currentPage:1 });
+    this.setState({ albums: sortedalbums, currentPage:1 });
   }
 
   handleSortByAlbumAZ = () => {
-    const sortedComposers = [...this.state.composers].sort((a, b) => {
+    const sortedalbums = [...this.state.albums].sort((a, b) => {
       return a.title.localeCompare(b.title);
     });
-    this.setState({ composers: sortedComposers, currentPage:1 });
+    this.setState({ albums: sortedalbums, currentPage:1 });
   }
 
   handleSortByAlbumZA = () => {
-    const sortedComposers = [...this.state.composers].sort((a, b) => {
+    const sortedalbums = [...this.state.albums].sort((a, b) => {
       return b.title.localeCompare(a.natitleme);
     });
-    this.setState({ composers: sortedComposers, currentPage:1 });
+    this.setState({ albums: sortedalbums, currentPage:1 });
   }
 
   handleSortByYear = () => {
-    const sortedComposers = [...this.state.composers].sort((a, b) => {
+    const sortedalbums = [...this.state.albums].sort((a, b) => {
       return a.year - b.year;
     });
-    this.setState({ composers: sortedComposers, currentPage:1 });
+    this.setState({ albums: sortedalbums, currentPage:1 });
   }
 
   handleSortByYearRecent = () => {
-    const sortedComposers = [...this.state.composers].sort((a, b) => {
+    const sortedalbums = [...this.state.albums].sort((a, b) => {
       return b.year - a.year;
     });
-    this.setState({ composers: sortedComposers, currentPage:1 });
+    this.setState({ albums: sortedalbums, currentPage:1 });
   }
 
   handlePageClick = (event) => {
@@ -52,8 +71,8 @@ class Home extends React.Component {
   }
 
   handleNextPage = () => { 
-    const { currentPage, cardsPerPage, composers } = this.state;
-    const maxPage = Math.ceil(composers.length / cardsPerPage);
+    const { currentPage, cardsPerPage, albums } = this.state;
+    const maxPage = Math.ceil(albums.length / cardsPerPage);
   
     if (currentPage < maxPage) {
       this.setState({ currentPage: currentPage + 1 });
@@ -79,11 +98,11 @@ class Home extends React.Component {
     }));
   } 
   handleHomeScreen = () => {
-    const sortedComposers = [...this.state.composers].sort((a, b) => {
+    const sortedalbums = [...this.state.albums].sort((a, b) => {
       return a.id - b.id;
     });
     this.setState({
-      composers: sortedComposers,
+      albums: sortedalbums,
       selectedCategory: '',
       currentPage:1,
       showForm: false,
@@ -91,10 +110,10 @@ class Home extends React.Component {
       }
 
   handleAddItem = (newItem) => {
-    const newId = this.state.composers[this.state.composers.length - 1].id + 1;
+    const newId = this.state.albums[this.state.albums.length - 1].id + 1;
     const itemWithId = { id: newId, ...newItem };
     this.setState((prevState) => ({
-      composers: [...prevState.composers, itemWithId],
+      albums: [...prevState.albums, itemWithId],
       showForm: false,
     }));
   }; 
