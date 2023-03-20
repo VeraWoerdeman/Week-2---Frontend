@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Card from './components/Cards';
-//import composers from './Composers.json'
+import composers from './Composers.json'
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AddItemForm from './components/AddItemForm';
+
 
 class App extends Component {
   constructor(props) {
@@ -25,6 +26,8 @@ class App extends Component {
     },
   };  
 }
+
+
   handleSortByNameAZ = () => {
     const sortedComposers = [...this.state.composers].sort((a, b) => {
       return a.name.localeCompare(b.name);
@@ -136,6 +139,7 @@ class App extends Component {
         category={composer.category}
         image={composer.image}
       />
+      
     ));
   
     return (
