@@ -1,56 +1,85 @@
 const { application } = require('express');
 const db = require('../db.js');
 
-exports.getAllArtists = (req, res) =>  {
-    const query = 'Select * from Artists'; 
-    db.all(query, [], (err, rows) => { 
-        if(err) { 
-            res.status(500).json({ error: err.message });
-            return;
+exports.getAllArtists = (req, res) => {
+    const query = 'SELECT * FROM Artists'; 
+    db.pool.request().query(query, (err, result) => {
+      if (err) { 
+        console.log('Error executing query:', err);
+        res.status(500).send('Error executing query');
+      } else {
+        const jsonResult = result.recordset.map((record) => {
+            return JSON.stringify(record) + '\n';
+          }).join('\n');
+          res.set('Content-Type', 'application/json');
+          res.send(jsonResult);
         }
-        res.setHeader('Content-Type', 'application/json')
-        res.statur(200).json(rows);
     });
-};
+  };
 
-exports.getAllAlbums = (req, res) =>  {
-    const query = 'Select * from Albums'; 
-    db.all(query, [], (err, rows) => { 
-        if(err) { 
-            res.status(500).json({ error: err.message });
-            return;
+  exports.getAllAlbums = (req, res) => {
+    const query = 'SELECT * FROM Albums'; 
+    db.pool.request().query(query, (err, result) => {
+      if (err) { 
+        console.log('Error executing query:', err);
+        res.status(500).send('Error executing query');
+      } else {
+        const jsonResult = result.recordset.map((record) => {
+            return JSON.stringify(record) + '\n';
+          }).join('\n');
+          res.set('Content-Type', 'application/json');
+          res.send(jsonResult);
         }
-        res.setHeader('Content-Type', 'application/json')
-        res.statur(200).json(rows);
     });
-};
+  };
 
 exports.getArtistById = (req, res) => { 
     const query = 'Select * from Artists where id = ?'
-    const id = req.params.id; 
-    db.get(query, [id], (err,row) => { 
-        if(err) { 
-            res.status(500).json({error: err.message});
-            return;
-        } if (!row) { 
-            res.status(404).json({error: 'Artist not found'});
-            return;
-        }
-        res.setHeader('Content-Type', 'application/json')
-        res.status(200).json(row);
-    });
-};
+    db.pool.request().query(query, (err, result) => {
+        if (err) { 
+          console.log('Error executing query:', err);
+          res.status(500).send('Error executing query');
+        } else {
+          const jsonResult = result.recordset.map((record) => {
+              return JSON.stringify(record) + '\n';
+            }).join('\n');
+            res.set('Content-Type', 'application/json');
+            res.send(jsonResult);
+          }
+      });
+    };
 
 exports.createArtist = (req, res) => { 
-    const query = 'insert into Artists (Name) values (?)'
-    const { name } = req.body;
-    db.run(query, [name], function (err) { 
-        if(err) { 
-            res.status(500).json({ error: err.message });
-            return;
+    const query  = 'INSERT INTO artists (Name) VALUES (@name)'
+        const { name } = req.body;
+        db.pool.request().query(query, (Err, result) => {
+          if (err) {
+            console.log('Error executing query:', err);
+            res.status(500).send('Error executing query');
+          } else {
+            const jsonResult = result.recordset.map((record) => {
+                return JSON.stringify(record) + '\n';
+              }).join('\n');
+              res.set('Content-Type', 'application/json');
+              res.send(jsonResult);
+            res.send(`Artist ${name} has been added to the database`);
+          }
+        });
+      };
+
+exports.deleteArtistById('/artists/:id', (req, res) => {
+    const artistId = req.params.id;
+    const query = 'DELETE FROM artists WHERE id = @id'
+    db.pool.request()
+      .input('id', sql.Int, artistId)
+      .query('DELETE FROM artists WHERE id = @id', (err, result) => {
+        if (err) {
+          console.log('Error deleting artist:', err);
+          res.status(500).send('Error deleting artist');
+        } else {
+          console.log('Artist deleted:', artistId);
+          res.status(204).send();
         }
-        res.setHeader('Content-Type', 'application/json');
-        res.status(201).json({ id: this.lastID });
-    });
-}
+      });
+  });
 
