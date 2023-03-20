@@ -123,6 +123,7 @@ class App extends Component {
   };
 
   render() {
+    
     const { composers, currentPage, cardsPerPage, selectedCategory } = this.state;
     const filteredComposers = selectedCategory
       ? composers.filter(composer => composer.category === selectedCategory)

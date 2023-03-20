@@ -1,26 +1,22 @@
-import React, { Component } from 'react';
-import Card from './components/Cards';
-import composers from './Composers.json'
-import Header from './components/Header';
-import Footer from './components/Footer';
-import AddItemForm from './components/AddItemForm';
-import Home from './pages/Home'
-import Collection from './pages/Collection';
-import { Router, Routes, Route } from 'react-router-dom';
-import './App.css'
+//make this app.js show the home page and the collection page
 
-function App()  {
-    return (
-<div>
-    <Router>
-        <Header/>
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Collection from './pages/Collection';
+import './App.css';
+
+class App extends Component {
+    render() {
+        return (
+        <Router>
             <Routes>
-            <Route path="/" element={<Home />} />
-                <Route path="/collection" element={<Collection/>} />                
+            <Route exact path="/" component={Collection} />
+            <Route exact path="/collection" component={Collection} />
             </Routes>
-            <Footer/>
-    </Router>
-</div>
-    );
+        </Router>
+        );
+    }
 }
+
 export default App;
