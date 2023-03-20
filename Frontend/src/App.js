@@ -13,12 +13,12 @@ function App()  {
     return (
 <div>
     <Router>
-        <Header>
+        <Header/>
             <Routes>
-                <Route path='/' element={<Home/>} />
-                <Route path='/' element={<Collection/>} />                
+               
+                <Route path="/" element={<Collection/>} />                
             </Routes>
-        </Header>
+            <Footer/>
     </Router>
 </div>
     );

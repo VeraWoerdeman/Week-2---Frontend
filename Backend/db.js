@@ -4,7 +4,8 @@ const sql = require('mssql');
 
 const config = {
   user: 'vera',
-  password: 'superGeheim!',
+  password: 'nietGeheim!',
+  port: 1433,
   server: 'collectionserver.database.windows.net',
   database: 'CollectionDB'
 };
@@ -19,9 +20,16 @@ pool.connect(err => {
   }
 });
 
+pool.on('error', (err) => {
+  console.error('SQL Pool Error:', err);
+});
+
+
 app.get('/', (req, res) => { 
     res.send('Hello World!')
-})
+});
+
+
 
 //GET-requests
 app.get('/artists', (req, res) => {
@@ -96,12 +104,12 @@ app.post('/composers', (req, res) => {
 
 app.post('/albums', (req, res) => {
   const { name } = req.body;
-  pool.request().input('Name', sql.NVarChar, name).query('INSERT INTO composers (Name) VALUES (@name)', (err, result) => {
+  pool.request().input('Name', sql.NVarChar, name).query('INSERT INTO albums (Name) VALUES (@name)', (err, result) => {
     if (err) {
       console.log('Error executing query:', err);
       res.status(500).send('Error executing query');
     } else {
-      res.send(`Composer ${name} has been added to the database`);
+      res.send(`Album ${name} has been added to the database`);
     }
   });
 });
@@ -199,6 +207,7 @@ app.get('/composers/search', (req, res) => {
     });
 });
 
+module.exports = { sql, pool }
 // const port = 3010;
 // app.listen(port, () => {
 //   console.log(`Server is running on port ${port}`);
