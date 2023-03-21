@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3004'; 
+const baseUrl = 'http://localhost:4001'; 
 
 function getAllArtists() {
   return fetch(`${baseUrl}/artists`)
