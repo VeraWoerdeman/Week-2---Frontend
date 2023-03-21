@@ -12,7 +12,8 @@ exports.getAllArtists = (req, res) => {
             return JSON.stringify(record) + '\n';
           }).join('\n');
           res.set('Content-Type', 'application/json');
-          res.send(jsonResult);
+                    //res.send(jsonResult);
+                    res.json(result.recordset);
         }
     });
   };
@@ -29,7 +30,8 @@ exports.getAllArtists = (req, res) => {
             return JSON.stringify(record) + '\n';
           }).join('\n');
           res.set('Content-Type', 'application/json');
-          res.send(jsonResult);
+                    //res.send(jsonResult);
+                    res.json(result.recordset);
         }
     });
   };
@@ -90,7 +92,7 @@ exports.createArtist = (req, res) => {
       };
       
 //create album
-exports.createAlbums = (req, res) => { 
+exports.createAlbum = (req, res) => { 
   const query  = 'INSERT INTO Albums (Name) VALUES (@name)'
       const { name } = req.body;
       db.pool.request().input('name', name).query(query, (err, result) => {
