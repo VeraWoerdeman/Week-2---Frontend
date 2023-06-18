@@ -1,120 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-class AddItemForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      title: '',
-      year: '',
-      category: '',
-      image: '',
-    };
-  }
+const AddItemForm = ({ onSubmit }) => {
+  const [formState, setFormState] = useState({
+    name: '',
+    title: '',
+    year: '',
+    category: '',
+    image: '',
+  });
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const newItem = { ...this.state };
-    this.props.handleAddItem(newItem);
-    this.setState({
-      name: '',
-      title: '',
-      year: '',
-      category: '',
-      image: '',
+  const handleChange = (e) => {
+    setFormState({
+      ...formState,
+      [e.target.name]: e.target.value,
     });
   };
 
-  handleInputChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value,
-    });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(formState);
   };
 
-  render() {
-    const { name, title, year, category, image } = this.state;
-    return (
-      <div className="col-lg-auto d-block justify-content-center">
-      <form onSubmit={this.handleSubmit}>
-        <div className="card form-group">
-          <label htmlFor="name">Name: </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={name}
-            onChange={this.handleInputChange}
-            required
-          />
-        </div>
-
-        <div className="card form-group">
-          <label htmlFor="title">Title: </label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={title}
-            onChange={this.handleInputChange}
-            required
-          />
-        </div>
-
-        <div className=" card form-group">
-          <label htmlFor="year">Year: </label>
-          <input
-            type="number"
-            id="year"
-            name="year"
-            value={year}
-            onChange={this.handleInputChange}
-            required
-          />
-        </div>
-
-        <div className="card form-group">
-          <label htmlFor="category">Category: </label>
-          <select
-            id="category"
-            name="category"
-            value={category}
-            onChange={this.handleInputChange}
-            required
-          >
-            <option value="">--Please choose an option--</option>
-            <option value="Classical">Classical</option>
-            <option value="Pop">Pop</option>
-            <option value="Metal">Metal</option>
-            <option value="Singer-Songwriter">Singer-Songwriter</option>
-            <option value="Alternative">Alternative</option>
-            <option value="Rock">Rock</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-
-        <div className="card form-group">
-          <label htmlFor="image">Image: </label>
-          <input
-            type="text"
-            id="image"
-            name="image"
-            value={image}
-            onChange={this.handleInputChange}
-            required
-          />
-        </div>
-        <div className="container justify-content-center">
-        <button type="submit" className="btn btn-primary mr-2">Submit</button>
-        <button type="button" className="btn btn-secondary" onClick={this.props.handleCancel}
-        >
-          Cancel
-        </button>
-        </div>
-      </form>
-      </div>
-    );
-  }
-}
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Naam:
+        <input type="text" name="name" onChange={handleChange} />
+      </label>
+      <label>
+        Titel:
+        <input type="text" name="title" onChange={handleChange} />
+      </label>
+      <label>
+        Jaar:
+        <input type="text" name="year" onChange={handleChange} />
+      </label>
+      <label>
+        Categorie:
+        <input type="text" name="category" onChange={handleChange} />
+      </label>
+      <label>
+        Afbeelding:
+        <input type="text" name="image" onChange={handleChange} />
+      </label>
+      <input type="submit" value="Submit" />
+    </form>
+  );
+};
 
 export default AddItemForm;

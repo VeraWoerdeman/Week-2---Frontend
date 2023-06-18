@@ -1,16 +1,16 @@
-const baseUrl = 'http://localhost:4001'; 
+import axios from 'axios';
 
-function getAllArtists() {
-  return fetch(`${baseUrl}/artists`)
-    .then(response => response.json());
-}
+const api = axios.create({
+    baseURL: import.meta.env.VITE_API_BASE_URL,
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    },
+    validateStatus: function (status) {
+        return status <= 210;
+    },
+});
 
-function getAllAlbums() {
-    return fetch(`${baseUrl}/albums`)
-      .then(response => response.json());
-  }
-
-  function getAllComposers() { 
-    return fetch(`${baseUrl}/composers`)
-    .then(response => response.json());
-  }
+export {
+    api
+};
