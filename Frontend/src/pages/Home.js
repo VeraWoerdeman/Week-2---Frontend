@@ -3,12 +3,14 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 import AddItemForm  from '../components/AddItemForm';
 import Collection from '../pages/Collection'
+import Cards from '../components/Cards';
 
 function Home() {
   return (
     <div className="App">
       <Header />
       <AddItemForm />
+      <Cards />
       <Collection />
       <Footer />
     </div>

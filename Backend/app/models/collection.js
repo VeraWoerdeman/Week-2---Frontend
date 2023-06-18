@@ -22,3 +22,5 @@ module.exports = (sequelize, DataTypes) => {
     )
     return Collection
 }
+
+module.exports = Collection 

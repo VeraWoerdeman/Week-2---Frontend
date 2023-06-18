@@ -1,58 +1,58 @@
-const db = require('../db.js');
+const db = require('../../db.js');
 
 //get all artists
 exports.getAllArtists = (req, res) => {
     const query = 'SELECT * FROM Artists'; 
-    db.pool.request().query(query, (err, result) => {
-      if (err) { 
-        console.log('Error executing query:', err);
-        res.status(500).send('Error executing query');
-      } else {
-        const jsonResult = result.recordset.map((record) => {
-            return JSON.stringify(record) + '\n';
-          }).join('\n');
-          res.set('Content-Type', 'application/json');
-                    //res.send(jsonResult);
-                    res.json(result.recordset);
-        }
+    db.poolPromise.then(pool => {
+      return pool.query(query);
+    }).then(result => {
+      const jsonResult = result.recordset.map((record) => {
+        return JSON.stringify(record) + '\n';
+      }).join('\n');
+      res.set('Content-Type', 'application/json');
+      res.send(jsonResult);
+    }).catch(err => {
+      console.log('Error executing query:', err);
+      res.status(500).send('Error executing query');
     });
   };
 
-  //get all albums
-  exports.getAllAlbums = (req, res) => {
-    const query = 'SELECT * FROM Albums'; 
-    db.pool.request().query(query, (err, result) => {
-      if (err) { 
-        console.log('Error executing query:', err);
-        res.status(500).send('Error executing query');
-      } else {
-        const jsonResult = result.recordset.map((record) => {
-            return JSON.stringify(record) + '\n';
-          }).join('\n');
-          res.set('Content-Type', 'application/json');
-                    //res.send(jsonResult);
-                    res.json(result.recordset);
-        }
-    });
-  };
+//get all albums
+exports.getAllAlbums = (req, res) => {
+  const query = 'SELECT * FROM Albums'; 
+  db.poolPromise.then(pool => {
+    return pool.query(query);
+  }).then(result => {
+    const jsonResult = result.recordset.map((record) => {
+      return JSON.stringify(record) + '\n';
+    }).join('\n');
+    res.set('Content-Type', 'application/json');
+    res.send(jsonResult);
+  }).catch(err => {
+    console.log('Error executing query:', err);
+    res.status(500).send('Error executing query');
+  });
+};
+
 
 //get artist by id
 exports.getArtistById = (req, res) => {
   const query = 'SELECT * FROM Artists WHERE ArtistId = @id';
   const { id } = req.params;
-  db.pool.request().input('id', id).query(query, (err, result) => {
-    if (err) { 
-      console.log('Error executing query:', err);
-      res.status(500).send('Error executing query');
-    } else {
-      const jsonResult = result.recordset.map((record) => {
-          return JSON.stringify(record) + '\n';
-        }).join('\n');
-        res.set('Content-Type', 'application/json');
-        res.send(jsonResult);
-      }
+  db.poolPromise.then(pool => {
+    return pool.query(query, { id });
+  }).then(result => {
+    const jsonResult = result.recordset.map((record) => {
+      return JSON.stringify(record) + '\n';
+    }).join('\n');
+    res.set('Content-Type', 'application/json');
+    res.send(jsonResult);
+  }).catch(err => {
+    console.log('Error executing query:', err);
+    res.status(500).send('Error executing query');
   });
 };
+
 
 //get album by id
 exports.getAlbumById = (req, res) => {
@@ -73,23 +73,24 @@ exports.getAlbumById = (req, res) => {
 };
 
 //create artist
-exports.createArtist = (req, res) => { 
-    const query  = 'INSERT INTO artists (Name) VALUES (@name)'
-        const { name } = req.body;
-        db.pool.request().input('name', name).query(query, (err, result) => {
-          if (err) {
-            console.log('Error executing query:', err);
-            res.status(500).send('Error executing query');
-          } else {
-            const jsonResult = result.recordset.map((record) => {
-                return JSON.stringify(record) + '\n';
-              }).join('\n');
-              res.set('Content-Type', 'application/json');
-              res.send(jsonResult);
-            res.send(`Artist ${name} has been added to the database`);
-          }
-        });
-      };
+exports.createArtist = (req, res) => {
+  const query = 'INSERT INTO artists (Name) VALUES (@name)';
+  const { name } = req.body;
+  db.poolPromise.then(pool => {
+    return pool.query(query, { name });
+  }).then(result => {
+    const jsonResult = result.recordset.map((record) => {
+      return JSON.stringify(record) + '\n';
+    }).join('\n');
+    res.set('Content-Type', 'application/json');
+    res.send(jsonResult);
+    res.send(`Artist ${name} has been added to the database`);
+  }).catch(err => {
+    console.log('Error executing query:', err);
+    res.status(500).send('Error executing query');
+  });
+};
+
       
 //create album
 exports.createAlbum = (req, res) => { 
@@ -112,23 +113,23 @@ exports.createAlbum = (req, res) => {
 
 //delete artist by id
 exports.deleteArtist = (req, res) => {
-  const query = 'DELETE FROM Artists WHERE id = ?'  
+  const query = 'DELETE FROM Artists WHERE id = ?';
   const { id } = req.params;
-  db.pool.request().input('id', id).query(query, (err, result) => {
-    if (err) { 
-      console.log('Error executing query:', err);
-      res.status(500).send('Error executing query');
-    } else {
-      const jsonResult = result.recordset.map((record) => {
-          return JSON.stringify(record) + '\n';
-        }).join('\n');
-        res.set('Content-Type', 'application/json');
-        res.send(jsonResult);
-        res.send(`Artist with id ${id} has been deleted from the database`);
-      }
-  }
-  );
+  db.poolPromise.then(pool => {
+    return pool.query(query, { id });
+  }).then(result => {
+    const jsonResult = result.recordset.map((record) => {
+      return JSON.stringify(record) + '\n';
+    }).join('\n');
+    res.set('Content-Type', 'application/json');
+    res.send(jsonResult);
+    res.send(`Artist with id ${id} has been deleted from the database`);
+  }).catch(err => {
+    console.log('Error executing query:', err);
+    res.status(500).send('Error executing query');
+  });
 };
+
 
 //delete album by id
 exports.deleteAlbum = (req, res) => {

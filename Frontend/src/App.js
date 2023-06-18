@@ -3,6 +3,7 @@ import Card from './components/Cards';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AddItemForm from './components/AddItemForm';
+import api from './Api';
 
 
 class App extends Component {
@@ -26,16 +27,16 @@ class App extends Component {
   };  
   }
   componentDidMount() {
-		fetch("http://localhost:4001/albums")
-		  .then((response) => response.json())
-		  .then((data) => {
-			this.setState({ albums: data });
-      console.log(data);
-		  })
-		  .catch((error) => {
-			console.error("Error fetching albums", error);
-		  });
-}
+    api.get('/albums')
+      .then(response => {
+        this.setState({ albums: response.data });
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error("Error fetching albums", error);
+      });
+  }    
+
   handleSortByNameAZ = () => {
     const sortedalbums = [...this.state.albums].sort((a, b) => {
       return a.name.localeCompare(b.name);

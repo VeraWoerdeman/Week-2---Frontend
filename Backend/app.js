@@ -1,25 +1,40 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors')
-const collectionRoutes = require('./Routes/collectionRoutes');
+const collectionRoutes = require('./app/Routes/collectionRoutes');
+const router = express.Router();  
+const app = express();
 
-const app = express(); 
-const PORT = process.env.PORT || 4001;
-
+const routePrefix = '/api/v1';
+app.use(express.json());
 app.use(cors());
-app.use(bodyParser.json());
+
+router.use('', collectionRoutes);
+app.use(router)
+
 app.use(bodyParser.urlencoded({extended:true}))
 
-app.use('/', collectionRoutes);
+
+app.start = (port) => {
+    port = port || 4001;
+    app.listen(port, () => console.log(`App listening on port ${port}`));
+};
 
 app.get('/', (req, res) => {
     res.send('Welcome!');
 })
 
+app.get('/', function (req, res) {
+    res.redirect(routePrefix);
+});
+
+// Set api versioning
+app.use(routePrefix, router);
+
 app.use((req, res) => {
     res.status(404).send('404 Not Found');
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+module.exports = app;
+
+app.start();

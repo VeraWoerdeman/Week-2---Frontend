@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import api from '../Api.js';
 
 function Cards() {
   const [albums, setAlbums] = useState([]);
-
   useEffect(() => {
-    axios.get('/albums')
+    api.get('/api/v1/albums')
       .then(response => {
         setAlbums(response.data);
       })
@@ -13,21 +13,22 @@ function Cards() {
         console.log(error);
       });
   }, []);
-
+  
   return (
     <div className="card-container">
       {albums.map(album => (
-        <div className="card" key={album.AlbumID}>
-          <img src={album.Image} alt={album.Title} />
-          <h2>{album.Title}</h2>
-          <p>{album.Artist}</p>
-          <p>{album.YearRelease}</p>
-          <p>{album.Genre}</p>
-          <p>{album.Description}</p>
+        <div className="card" key={album.id}>
+          <img src={album.image} alt={album.title} />
+          <h2>{album.title}</h2>
+          <p>{album.artist}</p>
+          <p>{album.year}</p>
+          <p>{album.category}</p>
+          <p>{album.description}</p>
         </div>
       ))}
     </div>
   );
+  
 }
 
 export default Cards;

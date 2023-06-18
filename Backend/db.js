@@ -8,18 +8,17 @@ const config = {
   database: 'CollectionDB'
 };
 
-const pool = new sql.ConnectionPool(config);
+const poolPromise = new sql.ConnectionPool(config)
+  .connect()
+  .then(pool => {
+    console.log('Connected to the database!');
+    return pool;
+  })
+  .catch(err => {
+    console.log('Database Connection Failed! ', err);
+    throw err;
+  });
 
-pool.connect(err => {
-  if (err) {
-    console.log('Error connecting to database:', err);
-  } else {
-    console.log('Connected to database!');
-  }
-});
-
-pool.on('error', (err) => {
-  console.error('SQL Pool Error:', err);
-});
-
-module.exports = pool;
+module.exports = {
+  poolPromise
+};

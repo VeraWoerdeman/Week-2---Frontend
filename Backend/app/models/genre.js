@@ -22,4 +22,4 @@ module.exports = (sequelize, DataTypes) => {
     return Genre;
     }
 
-    
+    module.exports = Genre;
