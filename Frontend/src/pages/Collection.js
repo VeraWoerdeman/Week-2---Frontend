@@ -5,8 +5,6 @@ import Footer from '../components/Footer';
 import AddItemForm from '../components/AddItemForm';
 
 
-//create a class Collection to show all the albums from the database from localhost:4001/albums
-
 class Collection extends Component {
     constructor(props) {
         super(props);
